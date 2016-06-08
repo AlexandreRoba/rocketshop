@@ -178,15 +178,42 @@ if (Products.find().count() === 0) {
     });
 }
 
+var vendorSeeds = [{
+    id: 1,
+    slug: "martian-armaments",
+    name: "Martian Armaments, Ltd",
+    description: "Purveyor of fine astronimical bits of warfare, specializing in Martian military needs."
+},
+    {
+        id: 2,
+        slug: "red-planet",
+        name: "Red Planet Love Machine",
+        description: "Bringing you closer to the ones you love, whatever planet you're from."
+    },
+    {
+        id: 3,
+        slug: "marinaris",
+        name: "Marinaris Outfitters",
+        description: "Get out and get fit on Mars! Marinaris will make sure you look good in red."
+    }
+];
+
+if (Vendors.find().count() === 0) {
+    _.each(vendorSeeds, function (vendor) {
+        Vendors.insert(vendor);
+        console.log("Inserted", vendor.name);
+    })
+}
+
 if (Meteor.users.find().count() === 0) {
     var id = Accounts.createUser({
         username: "Administrator",
-        email:"admin@test.com",
-        password:"admin123",
-        profile:{name: "Big Admin"},
-        roles:[]
+        email: "admin@test.com",
+        password: "admin123",
+        profile: {name: "Big Admin"},
+        roles: []
     });
 
-    Roles.addUsersToRoles(id,["Administrator"]);
+    Roles.addUsersToRoles(id, ["Administrator"]);
     console.log("Added Admin user...");
 }
